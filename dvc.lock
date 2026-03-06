@@ -16,3 +16,70 @@ stages:
       hash: md5
       md5: 7f07de26b054de4c36eed95a1277fe21
       size: 978285
+  preprocessing:
+    cmd: python src/preprocessing.py
+    deps:
+    - path: data/processed/raw_data.csv
+      hash: md5
+      md5: 7f07de26b054de4c36eed95a1277fe21
+      size: 978285
+    - path: src/preprocessing.py
+      hash: md5
+      md5: d4bf46f216319e418c743e439c39f546
+      size: 1427
+    outs:
+    - path: data/processed/preprocessed.csv
+      hash: md5
+      md5: c81dbcf227bb858ede738ae47c0201a9
+      size: 4148720
+    - path: models/scaler.pkl
+      hash: md5
+      md5: 0c63c7b1c9d8759b9c52f3ed8b9c9fb4
+      size: 2279
+  training:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/raw_data.csv
+      hash: md5
+      md5: 7f07de26b054de4c36eed95a1277fe21
+      size: 978285
+    - path: src/preprocessing.py
+      hash: md5
+      md5: d4bf46f216319e418c743e439c39f546
+      size: 1427
+    - path: src/train.py
+      hash: md5
+      md5: a6e22faefe81c60a003fd5f88fafec35
+      size: 2405
+    outs:
+    - path: models/logistic_regression.pkl
+      hash: md5
+      md5: e9f7f4ad8188dc695ec16d0432029b06
+      size: 1103
+    - path: models/random_forest.pkl
+      hash: md5
+      md5: 500d9af5be5276488d7fece1b87a4b9b
+      size: 19214713
+    - path: models/xgboost.pkl
+      hash: md5
+      md5: dfb19b0b389e6ad565a5aab2474a87c5
+      size: 270999
+  evaluation:
+    cmd: python src/evaluate.py
+    deps:
+    - path: models/logistic_regression.pkl
+      hash: md5
+      md5: e9f7f4ad8188dc695ec16d0432029b06
+      size: 1103
+    - path: models/random_forest.pkl
+      hash: md5
+      md5: 500d9af5be5276488d7fece1b87a4b9b
+      size: 19214713
+    - path: models/xgboost.pkl
+      hash: md5
+      md5: dfb19b0b389e6ad565a5aab2474a87c5
+      size: 270999
+    - path: src/evaluate.py
+      hash: md5
+      md5: ec61ae65657fe75e05335e4a29371b67
+      size: 2379
