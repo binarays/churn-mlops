@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      #Checkout code
+      # Checkout code
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      #Setup Python
+      # Setup Python
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: "3.9"
 
-      #Install dependencies
+      # Install dependencies
       - name: Install dependencies
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
-          pip install dvc
+          pip install "dvc[s3]"
 
-      #Configure DVC Remote
+      # Configure DVC Remote (DAGsHub)
       - name: Configure DVC Remote
         run: |
           dvc remote add -f origin https://dagshub.com/${{ secrets.DAGSHUB_USERNAME }}/churn-mlops.dvc
@@ -36,18 +36,14 @@ jobs:
           dvc remote modify origin user ${{ secrets.DAGSHUB_USERNAME }}
           dvc remote modify origin password ${{ secrets.DAGSHUB_TOKEN }}
 
-      - name: Pull Data
-        run: dvc pull
-        
-      #Run DVC Pipeline (This will run all stages)
+      # Run DVC Pipeline (Train models + generate files)
       - name: Run DVC Pipeline
         run: dvc repro
 
-      #Push updated data to DAGsHub
-      - name: Push DVC Data
+      # Push generated models/data to remote
+      - name: Push DVC Artifacts
         run: dvc push
 
-      #Build Docker Image (for API deployment)
+      # Build Docker Image
       - name: Build Docker Image
-
         run: docker build -t churn-api .
