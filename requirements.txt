@@ -10,3 +10,8 @@ matplotlib
 seaborn
 joblib
 apache-airflow
+python-dotenv
+pydantic
+requests
+PyYAML
+scipy
