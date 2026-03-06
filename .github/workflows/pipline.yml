@@ -36,6 +36,9 @@ jobs:
           dvc remote modify origin user ${{ secrets.DAGSHUB_USERNAME }}
           dvc remote modify origin password ${{ secrets.DAGSHUB_TOKEN }}
 
+      - name: Pull Data
+        run: dvc pull
+        
       #Run DVC Pipeline (This will run all stages)
       - name: Run DVC Pipeline
         run: dvc repro
