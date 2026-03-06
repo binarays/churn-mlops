@@ -1,0 +1,37 @@
+stages:
+
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+      - src/data_ingestion.py
+      - data/raw/Churn_Prediction_DataSet.csv
+    outs:
+      - data/processed/raw_data.csv
+
+  preprocessing:
+    cmd: python src/preprocessing.py
+    deps:
+      - src/preprocessing.py
+      - data/processed/raw_data.csv
+    outs:
+      - data/processed/preprocessed.csv
+      - models/scaler.pkl
+
+  training:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - src/preprocessing.py
+      - data/processed/raw_data.csv
+    outs:
+      - models/logistic_regression.pkl
+      - models/random_forest.pkl
+      - models/xgboost.pkl
+
+  evaluation:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/logistic_regression.pkl
+      - models/random_forest.pkl
+      - models/xgboost.pkl

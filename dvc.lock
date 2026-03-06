@@ -1,0 +1,18 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/data_ingestion.py
+    deps:
+    - path: data/raw/Churn_Prediction_DataSet.csv
+      hash: md5
+      md5: 0f9de68e012bd3aed5fa7cdc9fc421af
+      size: 977501
+    - path: src/data_ingestion.py
+      hash: md5
+      md5: 873e98e2468752498ad20d2f15e8c851
+      size: 616
+    outs:
+    - path: data/processed/raw_data.csv
+      hash: md5
+      md5: 7f07de26b054de4c36eed95a1277fe21
+      size: 978285

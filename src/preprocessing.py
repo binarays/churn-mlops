@@ -39,6 +39,8 @@ def preprocess_data(input_path: str):
     os.makedirs("models", exist_ok=True)
     joblib.dump(scaler, "models/scaler.pkl")
 
+    pd.DataFrame(X_scaled).to_csv("data/processed/preprocessed.csv", index=False)
+
     # Train test split
     X_train, X_test, y_train, y_test = train_test_split(
         X_scaled,

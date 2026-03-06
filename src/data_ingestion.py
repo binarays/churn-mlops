@@ -21,7 +21,7 @@ def load_data(input_path: str, output_path: str):
 
 if __name__ == "__main__":
 
-    input_file = "data/raw/telco_customer_churn_data.csv"
+    input_file = "data/raw/Churn_Prediction_DataSet.csv"
     output_file = "data/processed/raw_data.csv"
 
     load_data(input_file, output_file)
