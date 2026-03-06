@@ -1,0 +1,5 @@
+['remote "origin"']
+    url = https://github.com/binarays/churn-mlops.git
+    auth = basic
+    user = binarays
+    password = 956ba71c582b8b866d8721df9cced449f381f33e
