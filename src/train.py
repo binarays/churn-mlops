@@ -16,8 +16,8 @@ from preprocessing import preprocess_data
 # -----------------------------
 
 # Get values from environment variables (SECURE WAY)
-USERNAME = os.getenv("DAGSHUB_USERNAME")
-TOKEN = os.getenv("DAGSHUB_TOKEN")
+USERNAME = "binarays" #os.getenv("DAGSHUB_USERNAME")
+TOKEN = "956ba71c582b8b866d8721df9cced449f381f33e" #os.getenv("DAGSHUB_TOKEN")
 REPO = "churn-mlops"
 
 if USERNAME is None or TOKEN is None:
