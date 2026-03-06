@@ -14,17 +14,30 @@ from preprocessing import preprocess_data
 # -----------------------------
 # DAGsHub MLflow Configuration
 # -----------------------------
-USERNAME = "binarays"
-REPO = "churn-mlops"   
-TOKEN = "956ba71c582b8b866d8721df9cced449f381f33e"
 
-mlflow.set_tracking_uri(f"https://dagshub.com/{USERNAME}/{REPO}.mlflow")
+# Get values from environment variables (SECURE WAY)
+USERNAME = os.getenv("DAGSHUB_USERNAME")
+TOKEN = os.getenv("DAGSHUB_TOKEN")
+REPO = "churn-mlops"
 
-os.environ["MLFLOW_TRACKING_USERNAME"] = USERNAME
-os.environ["MLFLOW_TRACKING_PASSWORD"] = TOKEN
+if USERNAME is None or TOKEN is None:
+    print("WARNING: DAGsHub credentials not found in environment variables.")
+
+# Set tracking URI
+mlflow.set_tracking_uri(
+    f"https://dagshub.com/{USERNAME}/{REPO}.mlflow"
+)
+
+# Set authentication (for DAGsHub)
+os.environ["MLFLOW_TRACKING_USERNAME"] = USERNAME if USERNAME else ""
+os.environ["MLFLOW_TRACKING_PASSWORD"] = TOKEN if TOKEN else ""
 
 mlflow.set_experiment("Customer_Churn_Models")
 
+
+# -----------------------------
+# Training Function
+# -----------------------------
 
 def train_models():
 
@@ -52,13 +65,11 @@ def train_models():
             # Predictions
             predictions = model.predict(X_test)
 
-            # Calculate accuracy
+            # Accuracy
             accuracy = accuracy_score(y_test, predictions)
 
-            # Log parameters
+            # Log metrics
             mlflow.log_param("model_name", name)
-
-            # Log metric
             mlflow.log_metric("accuracy", accuracy)
 
             # Save model locally
