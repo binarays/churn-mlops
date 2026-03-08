@@ -17,6 +17,7 @@ from preprocessing import preprocess_data
 
 USERNAME = "binarays"
 TOKEN = "956ba71c582b8b866d8721df9cced449f381f33e"
+REPO = "churn-mlops"
 
 if USERNAME is None or TOKEN is None:
     print("WARNING: DAGsHub credentials not found in environment variables.")
