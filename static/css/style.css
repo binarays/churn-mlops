@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #000000, #363636);
+    background-color: #000000;
     min-height: 100vh;
     font-family: Arial;
     display: flex;
@@ -13,30 +13,92 @@ body {
 
 .title {
     text-align: center;
-    color: white;
+    color: chartreuse;
     font-weight: 700;
 }
 
-.subtitle {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
-}
-
 .main-card {
+    background-color: #000000;
+    color: chartreuse;
+    border: 5px dashed chartreuse;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.predict-btn {
-    width: 100%;
+.form-control {
+    background-color: #000000;
+    color: chartreuse;
+    border: 1px solid chartreuse;
+}
+
+.form-control::placeholder {
+    color: rgb(128, 255, 0);
+    opacity: 1;
+}
+
+.form-select {
+    background-color: #000000;
+    color: chartreuse;
+    border: 1px solid chartreuse;
+}
+
+.form-control:focus,
+.form-select:focus {
+    background-color: #000000;
+    color: chartreuse;
+    border-color: chartreuse;
+    box-shadow: 0 0 5px chartreuse;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.button-group .predict-btn,
+.button-group .clear-btn {
+    flex: 1;
+    font-weight: 400;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
     font-size: 18px;
+}
+
+.predict-btn {
+    background-color: chartreuse;
+    color: #000000;
+}
+
+.clear-btn {
+    background-color: chartreuse;
+    border: 2px solid chartreuse;
+    color: #000000;
+}
+
+.button-group .clear-btn:hover {
+    background-color: black;
+    color: chartreuse;
+    border: 2px solid chartreuse;
+    transition: 1s;
+}
+
+.button-group .predict-btn:hover {
+    background-color: black;
+    color: chartreuse;
+    border: 2px solid chartreuse;
+    transition: 1s;
 }
 
 .loading {
     display: none;
+    color: chartreuse;
     text-align: center;
+}
+
+.custom-spinner {
+    color: chartreuse;
 }
 
 .result-box {
@@ -44,7 +106,9 @@ body {
     text-align: center;
     padding: 20px;
     border-radius: 10px;
-    background: #f8f9fa;
+    border: 2px solid chartreuse;
+    color: chartreuse;
+    background: #000000;
 }
 
 .progress {
