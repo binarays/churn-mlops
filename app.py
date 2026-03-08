@@ -6,6 +6,9 @@ from pydantic import BaseModel
 import numpy as np
 import joblib
 import os
+import logging
+
+logger = logging.getLogger("uvicorn.error")
 
 # -----------------------------
 # FastAPI App
@@ -52,15 +55,12 @@ scaler = None
 @app.on_event("startup")
 def load_model():
     global model, scaler
-
-    if not os.path.exists(MODEL_PATH):
-        raise RuntimeError("Model file not found. Train the model first.")
-
-    if not os.path.exists(SCALER_PATH):
-        raise RuntimeError("Scaler file not found. Run preprocessing first.")
-
-    model = joblib.load(MODEL_PATH)
-    scaler = joblib.load(SCALER_PATH)
+    try:
+        model = joblib.load(MODEL_PATH)
+        scaler = joblib.load(SCALER_PATH)
+        logger.info("Model and scaler loaded successfully.")
+    except Exception as e:
+        logger.error(f"Failed to load model or scaler: {e}")
 
 # -----------------------------
 # Home Page (Frontend)
@@ -70,11 +70,13 @@ def home(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 # -----------------------------
-# Health Check
+# Health Check Endpoint
 # -----------------------------
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    if model is None or scaler is None:
+        return {"status": "unhealthy"}
+    return {"status": "healthy"}
 
 # -----------------------------
 # Input Schema
@@ -87,26 +89,13 @@ class CustomerData(BaseModel):
 # -----------------------------
 @app.post("/predict")
 def predict(data: CustomerData):
-
     try:
         features = np.array(data.features).reshape(1, -1)
-
-        # Scale input
         features_scaled = scaler.transform(features)
-
-        # Predict probability
         probability = model.predict_proba(features_scaled)[0][1]
-
-        # Convert to label
         prediction = "Yes" if probability > 0.5 else "No"
-
-        return {
-            "prediction": prediction,
-            "churn_probability": float(probability)
-        }
-
+        logger.info(f"Prediction: {prediction}, probability: {probability:.2f}")
+        return {"prediction": prediction, "churn_probability": float(probability)}
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Prediction error: {str(e)}"
-        )
+        logger.error(f"Prediction error: {e}")
+        raise HTTPException(status_code=500, detail=f"Prediction error: {str(e)}")
