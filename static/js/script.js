@@ -9,32 +9,25 @@ document.getElementById("predictForm").addEventListener("submit", async function
     loading.style.display = "block";
 
     const features = [
-
         parseFloat(document.getElementById("tenure").value),
-
         parseFloat(document.getElementById("monthlyCharges").value),
-
         parseFloat(document.getElementById("totalCharges").value),
-
         parseInt(document.getElementById("contract").value)
-
     ];
 
     try {
 
         const response = await fetch("/predict", {
-
             method: "POST",
-
             headers: {
                 "Content-Type": "application/json"
             },
-
-            body: JSON.stringify({
-                features: features
-            })
-
+            body: JSON.stringify({ features: features })
         });
+
+        if (!response.ok) {
+            throw new Error("Server error");
+        }
 
         const result = await response.json();
 
@@ -44,9 +37,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
         const probability = (result.churn_probability * 100).toFixed(2);
 
         resultBox.innerHTML = `
-
             <h3>Prediction: ${result.prediction}</h3>
-
             <p>Churn Probability: ${probability}%</p>
 
             <div class="progress">
@@ -56,7 +47,6 @@ document.getElementById("predictForm").addEventListener("submit", async function
                     ${probability}%
                 </div>
             </div>
-
         `;
 
     } catch (error) {
