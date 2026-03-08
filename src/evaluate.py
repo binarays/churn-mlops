@@ -14,6 +14,8 @@ from sklearn.metrics import (
 
 from preprocessing import preprocess_data
 
+mlflow.set_tracking_uri("file:./mlruns")
+mlflow.set_experiment("churn_evaluation")
 
 def evaluate_models():
 
