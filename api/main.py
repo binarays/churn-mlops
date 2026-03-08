@@ -15,11 +15,11 @@ app = FastAPI(
 )
 
 # -----------------------------
-# Enable CORS (important for frontend)
+# Enable CORS
 # -----------------------------
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # You can restrict later
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -31,17 +31,24 @@ app.add_middleware(
 MODEL_PATH = "models/best_model.pkl"
 SCALER_PATH = "models/scaler.pkl"
 
-# -----------------------------
-# Load Model Safely
-# -----------------------------
-if not os.path.exists(MODEL_PATH):
-    raise RuntimeError("Model file not found. Please train the model first.")
+model = None
+scaler = None
 
-if not os.path.exists(SCALER_PATH):
-    raise RuntimeError("Scaler file not found. Run preprocessing first.")
+# -----------------------------
+# Load Model on Startup
+# -----------------------------
+@app.on_event("startup")
+def load_model():
+    global model, scaler
 
-model = joblib.load(MODEL_PATH)
-scaler = joblib.load(SCALER_PATH)
+    if not os.path.exists(MODEL_PATH):
+        raise RuntimeError("Model file not found. Please train the model first.")
+
+    if not os.path.exists(SCALER_PATH):
+        raise RuntimeError("Scaler file not found. Run preprocessing first.")
+
+    model = joblib.load(MODEL_PATH)
+    scaler = joblib.load(SCALER_PATH)
 
 # -----------------------------
 # Input Schema
@@ -50,22 +57,25 @@ class CustomerData(BaseModel):
     features: list[float]
 
 # -----------------------------
-# Health Check
+# Home Endpoint
 # -----------------------------
 @app.get("/")
 def home():
-    return {
-        "message": "Customer Churn Prediction API is running"
-    }
+    return {"message": "Customer Churn Prediction API is running"}
+
+# -----------------------------
+# Health Check Endpoint
+# -----------------------------
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 # -----------------------------
 # Prediction Endpoint
 # -----------------------------
 @app.post("/predict")
 def predict(data: CustomerData):
-
     try:
-        # Convert to numpy array
         features = np.array(data.features).reshape(1, -1)
 
         # Scale input
