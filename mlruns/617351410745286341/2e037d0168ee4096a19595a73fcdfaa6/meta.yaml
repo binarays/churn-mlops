@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/Binara Yasas/Desktop/ml/mlruns/617351410745286341/2e037d0168ee4096a19595a73fcdfaa6/artifacts
+end_time: 1773004099234
+entry_point_name: ''
+experiment_id: '617351410745286341'
+lifecycle_stage: active
+run_id: 2e037d0168ee4096a19595a73fcdfaa6
+run_name: random_forest_evaluation
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1773004096573
+status: 3
+tags: []
+user_id: Binara Yasas
