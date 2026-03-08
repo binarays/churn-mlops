@@ -1,5 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 import numpy as np
 import joblib
@@ -26,6 +28,16 @@ app.add_middleware(
 )
 
 # -----------------------------
+# Mount Static Files
+# -----------------------------
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# -----------------------------
+# Templates Directory
+# -----------------------------
+templates = Jinja2Templates(directory="templates")
+
+# -----------------------------
 # Model Paths
 # -----------------------------
 MODEL_PATH = "models/best_model.pkl"
@@ -42,7 +54,7 @@ def load_model():
     global model, scaler
 
     if not os.path.exists(MODEL_PATH):
-        raise RuntimeError("Model file not found. Please train the model first.")
+        raise RuntimeError("Model file not found. Train the model first.")
 
     if not os.path.exists(SCALER_PATH):
         raise RuntimeError("Scaler file not found. Run preprocessing first.")
@@ -51,30 +63,31 @@ def load_model():
     scaler = joblib.load(SCALER_PATH)
 
 # -----------------------------
-# Input Schema
-# -----------------------------
-class CustomerData(BaseModel):
-    features: list[float]
-
-# -----------------------------
-# Home Endpoint
+# Home Page (Frontend)
 # -----------------------------
 @app.get("/")
-def home():
-    return {"message": "Customer Churn Prediction API is running"}
+def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # -----------------------------
-# Health Check Endpoint
+# Health Check
 # -----------------------------
 @app.get("/health")
 def health():
     return {"status": "ok"}
 
 # -----------------------------
+# Input Schema
+# -----------------------------
+class CustomerData(BaseModel):
+    features: list[float]
+
+# -----------------------------
 # Prediction Endpoint
 # -----------------------------
 @app.post("/predict")
 def predict(data: CustomerData):
+
     try:
         features = np.array(data.features).reshape(1, -1)
 
