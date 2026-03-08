@@ -41,4 +41,4 @@ EXPOSE 7860
 # -----------------------------
 # Start FastAPI Server (Production Ready)
 # -----------------------------
-CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-7860}"]
+CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
