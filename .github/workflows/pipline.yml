@@ -34,7 +34,7 @@ jobs:
 
       # 🔥 Pull existing data first
       - name: Pull DVC Data
-        run: dvc pull
+        run: dvc pull --force
 
       # 🔥 Run pipeline
       - name: Run DVC Pipeline
