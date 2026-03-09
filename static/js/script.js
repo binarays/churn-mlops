@@ -2,7 +2,7 @@ function yesNoToInt(val) {
     return val === "Yes" ? 1 : 0;
 }
 
-function gnderToInt(val) {
+function genderToInt(val) {
     return val === "Male" ? 1 : 0;
 }
 document.getElementById("predictForm").addEventListener("submit", async function (e) {
@@ -17,7 +17,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
     loading.style.display = "block";
 
     const features = [
-        genderToInt(document.getElementById("gender")).value,
+        genderToInt(document.getElementById("gender").value),
         parseInt(document.getElementById("seniorCitizen").value),
         yesNoToInt(document.getElementById("partner").value),
         yesNoToInt(document.getElementById("dependents").value),
