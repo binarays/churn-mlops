@@ -2,6 +2,9 @@ function yesNoToInt(val) {
     return val === "Yes" ? 1 : 0;
 }
 
+function gnderToInt(val) {
+    return val === "Male" ? 1 : 0;
+}
 document.getElementById("predictForm").addEventListener("submit", async function (e) {
 
     e.preventDefault();
@@ -14,8 +17,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
     loading.style.display = "block";
 
     const features = [
-        document.getElementById("gender").value === "Male" ? 1 : 0,
-        document.getElementById("gender").value === "Female" ? 1 : 0,
+        genderToInt(document.getElementById("gender")).value,
         parseInt(document.getElementById("seniorCitizen").value),
         yesNoToInt(document.getElementById("partner").value),
         yesNoToInt(document.getElementById("dependents").value),
@@ -27,8 +29,12 @@ document.getElementById("predictForm").addEventListener("submit", async function
         document.getElementById("internetService").value === "DSL" ? 1 : 0,
         document.getElementById("internetService").value === "Fiber optic" ? 1 : 0,
         document.getElementById("internetService").value === "No" ? 1 : 0,
-        yesNoToInt(document.getElementById("onlineSecurity").value),
-        yesNoToInt(document.getElementById("onlineBackup").value),
+        document.getElementById("onlineSecurity").value === "Yes" ? 1 : 0,
+        document.getElementById("onlineSecurity").value === "No" ? 1 : 0,
+        document.getElementById("onlineSecurity").value === "No internet service" ? 1 : 0,
+        document.getElementById("onlineBackup").value === "Yes" ? 1 : 0,
+        document.getElementById("onlineBackup").value === "No" ? 1 : 0,
+        document.getElementById("onlineBackup").value === "No internet service" ? 1 : 0,
         yesNoToInt(document.getElementById("deviceProtection").value),
         yesNoToInt(document.getElementById("techSupport").value),
         yesNoToInt(document.getElementById("streamingTV").value),
