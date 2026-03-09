@@ -11,10 +11,15 @@ WORKDIR /app
 # -----------------------------
 # Install system dependencies
 # -----------------------------
+ENV PYTHONUNBUFFERED=1
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     curl \
     git \
+    dnsutils \
+    iputils-ping \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 # -----------------------------
