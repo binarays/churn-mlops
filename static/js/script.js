@@ -23,30 +23,38 @@ document.getElementById("predictForm").addEventListener("submit", async function
         yesNoToInt(document.getElementById("dependents").value),
         parseFloat(document.getElementById("tenure").value),
         yesNoToInt(document.getElementById("phoneService").value),
-        document.getElementById("multipleLines").value === "No" ? 1 : 0,
-        document.getElementById("multipleLines").value === "Yes" ? 1 : 0,
-        document.getElementById("multipleLines").value === "No phone service" ? 1 : 0,
+        yesNoToInt(document.getElementById("multipleLines").value),
+
         document.getElementById("internetService").value === "DSL" ? 1 : 0,
         document.getElementById("internetService").value === "Fiber optic" ? 1 : 0,
         document.getElementById("internetService").value === "No" ? 1 : 0,
-        document.getElementById("onlineSecurity").value === "Yes" ? 1 : 0,
-        document.getElementById("onlineSecurity").value === "No" ? 1 : 0,
-        document.getElementById("onlineSecurity").value === "No internet service" ? 1 : 0,
-        document.getElementById("onlineBackup").value === "Yes" ? 1 : 0,
-        document.getElementById("onlineBackup").value === "No" ? 1 : 0,
-        document.getElementById("onlineBackup").value === "No internet service" ? 1 : 0,
-        yesNoToInt(document.getElementById("deviceProtection").value),
-        yesNoToInt(document.getElementById("techSupport").value),
-        yesNoToInt(document.getElementById("streamingTV").value),
-        yesNoToInt(document.getElementById("streamingMovies").value),
+
+        yesNoToInt(document.getElementById("onlineSecurity").value),
+        yesNoToInt(document.getElementById("onlineBackup").value),
+
+        document.getElementById("deviceProtection").value === "Yes" ? 1 : 0,
+        document.getElementById("deviceProtection").value === "No" ? 1 : 0,
+
+        document.getElementById("techSupport").value === "Yes" ? 1 : 0,
+        document.getElementById("techSupport").value === "No" ? 1 : 0,
+
+        document.getElementById("streamingTV").value === "Yes" ? 1 : 0,
+        document.getElementById("streamingTV").value === "No" ? 1 : 0,
+
+        document.getElementById("streamingMovies").value === "Yes" ? 1 : 0,
+        document.getElementById("streamingMovies").value === "No" ? 1 : 0,
+
         document.getElementById("contract").value === "Month-to-month" ? 1 : 0,
         document.getElementById("contract").value === "One year" ? 1 : 0,
         document.getElementById("contract").value === "Two year" ? 1 : 0,
+
         yesNoToInt(document.getElementById("paperlessBilling").value),
+
         document.getElementById("paymentMethod").value === "Electronic check" ? 1 : 0,
         document.getElementById("paymentMethod").value === "Mailed check" ? 1 : 0,
         document.getElementById("paymentMethod").value === "Bank transfer (automatic)" ? 1 : 0,
         document.getElementById("paymentMethod").value === "Credit card (automatic)" ? 1 : 0,
+
         parseFloat(document.getElementById("monthlyCharges").value),
         parseFloat(document.getElementById("totalCharges").value)
     ];
