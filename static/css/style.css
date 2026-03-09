@@ -109,8 +109,36 @@ body {
     border: 2px solid chartreuse;
     color: chartreuse;
     background: #000000;
+    word-wrap: break-word;
 }
 
 .progress {
     height: 25px;
+}
+
+
+.row .col-md-6,
+.row .col-md-12 {
+    margin-bottom: 15px;
+}
+
+
+.form-select {
+    color: chartreuse;
+    background-color: #000000;
+    border: 1px solid chartreuse;
+    padding-right: 2.5rem;
+}
+
+
+.form-control::placeholder {
+    color: rgb(128, 255, 0);
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .row .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }

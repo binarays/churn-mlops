@@ -1,3 +1,11 @@
+function yesNoToInt(val) {
+    return val === "Yes" ? 1 : 0;
+}
+
+function genderToInt(val) {
+    return val === "Male" ? 1 : 0;
+}
+
 document.getElementById("predictForm").addEventListener("submit", async function (e) {
 
     e.preventDefault();
@@ -9,10 +17,32 @@ document.getElementById("predictForm").addEventListener("submit", async function
     loading.style.display = "block";
 
     const features = [
+        genderToInt(document.getElementById("gender").value),
+        parseInt(document.getElementById("seniorCitizen").value),
+        yesNoToInt(document.getElementById("partner").value),
+        yesNoToInt(document.getElementById("dependents").value),
         parseFloat(document.getElementById("tenure").value),
+        yesNoToInt(document.getElementById("phoneService").value),
+        yesNoToInt(document.getElementById("multipleLines").value),
+        document.getElementById("internetService").value === "DSL" ? 1 : 0,
+        document.getElementById("internetService").value === "Fiber optic" ? 1 : 0,
+        document.getElementById("internetService").value === "No" ? 1 : 0,
+        yesNoToInt(document.getElementById("onlineSecurity").value),
+        yesNoToInt(document.getElementById("onlineBackup").value),
+        yesNoToInt(document.getElementById("deviceProtection").value),
+        yesNoToInt(document.getElementById("techSupport").value),
+        yesNoToInt(document.getElementById("streamingTV").value),
+        yesNoToInt(document.getElementById("streamingMovies").value),
+        document.getElementById("contract").value === "Month-to-month" ? 1 : 0,
+        document.getElementById("contract").value === "One year" ? 1 : 0,
+        document.getElementById("contract").value === "Two year" ? 1 : 0,
+        yesNoToInt(document.getElementById("paperlessBilling").value),
+        document.getElementById("paymentMethod").value === "Electronic check" ? 1 : 0,
+        document.getElementById("paymentMethod").value === "Mailed check" ? 1 : 0,
+        document.getElementById("paymentMethod").value === "Bank transfer (automatic)" ? 1 : 0,
+        document.getElementById("paymentMethod").value === "Credit card (automatic)" ? 1 : 0,
         parseFloat(document.getElementById("monthlyCharges").value),
-        parseFloat(document.getElementById("totalCharges").value),
-        parseInt(document.getElementById("contract").value)
+        parseFloat(document.getElementById("totalCharges").value)
     ];
 
     try {

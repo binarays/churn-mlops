@@ -13,7 +13,7 @@
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='16' fill='chartreuse'/></svg>">
 
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/tstyle.css">
 
 </head>
 
@@ -31,30 +31,174 @@
 
                     <div class="row">
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tenure (Months)</label>
-                            <input type="number" class="form-control" id="tenure" placeholder="Enter tenure" required>
-                        </div>
+                        <div class="row">
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Monthly Charges</label>
-                            <input type="number" class="form-control" id="monthlyCharges"
-                                placeholder="Enter monthly charges" required>
-                        </div>
+                            <!-- Gender -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Gender</label>
+                                <select class="form-select" id="gender">
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                </select>
+                            </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Total Charges</label>
-                            <input type="number" class="form-control" id="totalCharges"
-                                placeholder="Enter total charges" required>
-                        </div>
+                            <!-- Senior Citizen -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Senior Citizen</label>
+                                <select class="form-select" id="seniorCitizen">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Contract Type</label>
-                            <select class="form-select" id="contract">
-                                <option value="0">Month-to-Month</option>
-                                <option value="1">One Year</option>
-                                <option value="2">Two Year</option>
-                            </select>
+                            <!-- Partner -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Partner</label>
+                                <select class="form-select" id="partner">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Dependents -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Dependents</label>
+                                <select class="form-select" id="dependents">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Tenure -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tenure (Months)</label>
+                                <input type="number" class="form-control" id="tenure" required>
+                            </div>
+
+                            <!-- Phone Service -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Phone Service</label>
+                                <select class="form-select" id="phoneService">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Multiple Lines -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Multiple Lines</label>
+                                <select class="form-select" id="multipleLines">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Internet Service -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Internet Service</label>
+                                <select class="form-select" id="internetService">
+                                    <option value="DSL">DSL</option>
+                                    <option value="Fiber optic">Fiber optic</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Online Security -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Online Security</label>
+                                <select class="form-select" id="onlineSecurity">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Online Backup -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Online Backup</label>
+                                <select class="form-select" id="onlineBackup">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Device Protection -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Device Protection</label>
+                                <select class="form-select" id="deviceProtection">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Tech Support -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Tech Support</label>
+                                <select class="form-select" id="techSupport">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Streaming TV -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Streaming TV</label>
+                                <select class="form-select" id="streamingTV">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Streaming Movies -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Streaming Movies</label>
+                                <select class="form-select" id="streamingMovies">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Contract -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Contract</label>
+                                <select class="form-select" id="contract">
+                                    <option value="Month-to-month">Month-to-month</option>
+                                    <option value="One year">One year</option>
+                                    <option value="Two year">Two year</option>
+                                </select>
+                            </div>
+
+                            <!-- Paperless Billing -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Paperless Billing</label>
+                                <select class="form-select" id="paperlessBilling">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                            </div>
+
+                            <!-- Payment Method -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Payment Method</label>
+                                <select class="form-select" id="paymentMethod">
+                                    <option value="Electronic check">Electronic check</option>
+                                    <option value="Mailed check">Mailed check</option>
+                                    <option value="Bank transfer (automatic)">Bank transfer</option>
+                                    <option value="Credit card (automatic)">Credit card</option>
+                                </select>
+                            </div>
+
+                            <!-- Monthly Charges -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Monthly Charges</label>
+                                <input type="number" class="form-control" id="monthlyCharges" required>
+                            </div>
+
+                            <!-- Total Charges -->
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Total Charges</label>
+                                <input type="number" class="form-control" id="totalCharges" required>
+                            </div>
+
                         </div>
 
                     </div>
